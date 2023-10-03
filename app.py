@@ -5,7 +5,7 @@
 
 !pip install git+http://github.com/brendanhasz/dsutils.git
 !pip install wordcloud
-!pip install scikit-surprise
+#!pip install scikit-surprise
 
 
 
