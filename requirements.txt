@@ -2,6 +2,6 @@ streamlit==0.87.0
 pandas==1.3.3
 numpy==1.21.2
 scikit-learn==0.24.2
-surprise==0.1
+scikit-surprise==1.1.1  # Updated to include scikit-surprise
 matplotlib==3.4.3
 wordcloud==1.8.1
