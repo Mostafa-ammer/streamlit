@@ -1,14 +1,3 @@
-!pip install scikit-surprise
-!pip install tensorflow
-!pip install --upgrade streamlit
-#install needed libraries
-
-!pip install git+http://github.com/brendanhasz/dsutils.git
-!pip install wordcloud
-#!pip install scikit-surprise
-
-
-
 %%writefile app900.py
 import streamlit as st
 import re
