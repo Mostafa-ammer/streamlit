@@ -1,4 +1,5 @@
-# Import required libraries
+# app900.py
+
 import streamlit as st
 import re
 import pandas as pd
@@ -10,7 +11,6 @@ from surprise.model_selection import train_test_split
 from surprise import accuracy
 import matplotlib.pyplot as plt
 
-# Set Streamlit layout style
 st.markdown(
     """
     <style>
@@ -25,13 +25,8 @@ st.markdown(
 )
 
 # Load Data
-@st.cache  # Cache the data to avoid reloading on each Streamlit run
-def load_data():
-    ratings_df = pd.read_csv('data/ratings.csv')
-    movies_data = pd.read_csv('data/movies.csv')
-    return ratings_df, movies_data
-
-ratings_df, movies_data = load_data()
+ratings_df = pd.read_csv('ratings.csv')
+movies_data = pd.read_csv('movies.csv')
 original_movies = movies_data
 
 # Function to remove the year from movie titles
@@ -89,35 +84,31 @@ def hybrid_recommendations(userId, title, k=10, r_c=11):
     return recommendations
 
 # Streamlit interface
-def main():
-    st.title("Movie Recommendation System")
-    user_id = st.text_input("Select User ID:")
-    movie_title = st.text_input("Enter Movie Title:")
-    num_recommendations = st.text_input("Number of Recommendations:")
+st.title("Movie Recommendation System")
+user_id = st.text_input("Select User ID:", )
+movie_title = st.text_input("Enter Movie Title:")
+num_recommendations = st.text_input("Number of Recommendations:", )
 
-    if st.button("Get Recommendations"):
-        recommendations = hybrid_recommendations(user_id, movie_title, num_recommendations)
+if st.button("Get Recommendations"):
+    recommendations = hybrid_recommendations(user_id, movie_title, num_recommendations)
 
-        st.subheader("Recommended Movies:")
-        for i, movie in enumerate(recommendations):
-            # Add a border around each recommended movie
-            st.markdown(
-                f"<div style='border: 2px solid #ccc; padding: 10px; margin: 5px;'>{i+1}. {movie}</div>",
-                unsafe_allow_html=True
-            )
+    st.subheader("Recommended Movies:")
+    for i, movie in enumerate(recommendations):
+        # Add a border around each recommended movie
+        st.markdown(
+            f"<div style='border: 2px solid #ccc; padding: 10px; margin: 5px;'>{i+1}. {movie}</div>",
+            unsafe_allow_html=True
+        )
 
-    # Sidebar images
-    caption1 = "Toy Story"
-    image_url1 = "https://media.comicbook.com/2019/03/toy-story-4-poster-1163565.jpeg"
-    st.sidebar.image(image_url1, caption=caption1, use_column_width=True)
+# Sidebar images
+caption1 = "Toy Story"
+image_url1 = "https://media.comicbook.com/2019/03/toy-story-4-poster-1163565.jpeg"  # Replace with your image URL
+st.sidebar.image(image_url1, caption=caption1, use_column_width=True)
 
-    caption2 = "Mulan"
-    image_url2 = "https://media.wdwnt.com/2019/12/EK9zDtnUcAA5zXM-4.jpeg"
-    st.sidebar.image(image_url2, caption=caption2, use_column_width=True)
+caption2 = "Mulan"
+image_url2 = "https://media.wdwnt.com/2019/12/EK9zDtnUcAA5zXM-4.jpeg"  # Replace with your image URL
+st.sidebar.image(image_url2, caption=caption2, use_column_width=True)
 
-    caption3 = "The Johnsons"
-    image_url3 = "https://intheposter.com/cdn/shop/products/the-family-comedy-in-the-poster-1_1200x.jpg?v=1694762497"
-    st.sidebar.image(image_url3, caption=caption3, use_column_width=True)
-
-if __name__ == '__main__':
-    main()
+caption3 = "The Johnsons"
+image_url3 = "https://intheposter.com/cdn/shop/products/the-family-comedy-in-the-poster-1_1200x.jpg?v=1694762497"  # Replace with your image URL
+st.sidebar.image(image_url3, caption=caption3, use_column_width=True)
